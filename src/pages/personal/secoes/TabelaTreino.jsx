@@ -12,17 +12,17 @@ export const TabelaTreino = () => {
 
   const [modalExercicio, setModalExercicio] = useState(null);
   const [modalTabelaTreino, setModalTabelaTreino] = useState(false);
+  const [modalTabelaTreinoUpdate, setModalTabelaTreinoUpdate] = useState(false);
   const [semanaInicioTabela, setSemanaInicioTabela] = useState("")
   const [semanaFimTabela, setSemanaFimTabela] = useState("")
   const [exercicios, setExercicios] = useState([]);
   const [semanaInicio, setSemanaInicio] = useState('');
   const [semanaFim, setSemanaFim] = useState('');
-  const [atleta, setAtleta] = useState('');
   
   const { id } = useParams();
 
   const notifySuccess = () => toast.success("Tabela de treino criada com Sucesso");
-  const notifyError = (error) => toast.error(error.response.data.descricao);
+  const notifyError = (error) => toast.error(error.response.data);
   
 
   const openModalExercicio = (exercicio) => {
@@ -40,10 +40,18 @@ export const TabelaTreino = () => {
   const closeModalTabelaTreino = () => {
     setModalTabelaTreino(false);
   };
+  const openModalTabelaTreinoUpdate = () => {
+    setSemanaInicio(semanaInicioTabela);
+    setSemanaFim(semanaFimTabela);
+    setModalTabelaTreinoUpdate(true);
+  };
+
+  const closeModalTabelaTreinoUpdate = () => {
+    setModalTabelaTreinoUpdate(false);
+  };
   const resetCamposTabelaTreino = () => {
     setSemanaInicio('');
     setSemanaFim('');
-    setAtleta('');
   }
 
   const fetchTabelaTreino = () => {
@@ -70,6 +78,23 @@ export const TabelaTreino = () => {
     })
     .catch(err => toast.error(err))
   }
+  const handleUpdateTabelaTreino = (event) => {
+    event.preventDefault();
+
+    api.put(`personal/atleta/tabelaTreino/${id}`, {
+      semanaInicio,
+      semanaFim,
+    })
+    .then(() => {
+      fetchTabelaTreino();
+      closeModalTabelaTreinoUpdate()
+      toast.success("Tabela de treino atualizada com sucesso")
+    })
+    .catch((err) =>{
+      console.log(err);
+      notifyError(err)
+    })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -78,8 +103,7 @@ export const TabelaTreino = () => {
         semanaFim,
         atleta: id
     })
-    .then((data) => {
-      // setTabelaTreinoUpdated(!tabelaTreinoUpdated)
+    .then(() => {
       fetchTabelaTreino();
       resetCamposTabelaTreino()
       closeModalTabelaTreino()
@@ -151,7 +175,7 @@ export const TabelaTreino = () => {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="text-center my-4">
-            <span className="text-xl">{semanaInicioTabela} / {semanaFimTabela}</span>
+          <span className="text-2xl text-custom-purple font-bold">{semanaInicioTabela} / {semanaFimTabela}</span>
           </div>
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
@@ -182,8 +206,49 @@ export const TabelaTreino = () => {
             </table>
           </div>
           <button className="px-4 py-2 mt-3 bg-red-600 text-white rounded float-right hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" onClick={handleDeleteTabelaTreino}>
-            Deletar Tabela de Treino
+            Deletar Tabela
           </button>
+          <button className="px-4 py-2 mt-3 mx-2 bg-orange-600 text-white rounded float-right hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" onClick={openModalTabelaTreinoUpdate}>
+            Atualizar Tabela
+          </button>
+          <Modal
+            isOpen={modalTabelaTreinoUpdate}
+            onRequestClose={closeModalTabelaTreinoUpdate}
+            contentLabel="Modal para atualizar tabela de treino"
+            style={{
+              content: {
+                position: 'relative',
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: '#F3F4F6',
+                borderRadius: '0.375rem',
+                padding: '2rem',
+                width: '80%',
+                maxWidth: '500px'
+              }
+            }}
+          >
+            <button onClick={closeModalTabelaTreinoUpdate} className="absolute right-3 top-3 hover:bg-custom-purple rounded">
+              <AiOutlineClose size={20} />
+            </button>
+            <h2 className="text-2xl mb-4 text-center">Atualizar Tabela de Treino</h2>
+            <form onSubmit={handleUpdateTabelaTreino}>
+              <label className="block mb-4">
+                <span className="text-custom-purple">Semana de Início:</span>
+                {console.log(semanaInicio)}
+                <input type="date" name="semanaInicio" value={semanaInicio} onChange={e => setSemanaInicio(e.target.value)} className="mt-1 block w-full py-2 px-3 rounded-md border-gray-300 shadow-sm focus:border-custom-purple focus:ring focus:ring-custom-purple focus:ring-opacity-50" />
+              </label>
+              <label className="block mb-4">
+                <span className="text-custom-purple">Semana Fim:</span>
+                <input type="date" name="semanaFim" value={semanaFim} onChange={e => setSemanaFim(e.target.value)} className="mt-1 block w-full py-2 px-3 rounded-md border-gray-300 shadow-sm focus:border-custom-purple focus:ring focus:ring-custom-purple focus:ring-opacity-50" />
+              </label>
+              <button type="submit" className="px-4 py-2 bg-orange-600 text-white rounded">Atualizar</button>
+            </form>
+          </Modal>
         </div>
       </div>
     )}
