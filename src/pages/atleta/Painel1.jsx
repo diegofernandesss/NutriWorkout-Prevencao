@@ -6,10 +6,9 @@ import { api } from "../../services/api";
 import { AuthContext } from "../../Context/Auth";
 import { ToastContainer } from "react-toastify";
 import { Outlet, useNavigate} from "react-router-dom";
-import { DeletarAtleta } from "./DeletarAtleta";
 
 export const Painel1 = () => {
-    const { signOut, setUser } = useContext(AuthContext)
+    const { signOut } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -18,8 +17,6 @@ export const Painel1 = () => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isDropdownOpenPerf, setIsDropdownOpenPerf] = useState(false);
-
-    const [showAddModal, setShowAddModal] = useState(false);
 
     const toggleDropdown = async () => {
         if(!isDropdownOpen){
@@ -48,21 +45,6 @@ export const Painel1 = () => {
             atleta();
     }, [])
 
-    const handleAddModal = async () => {
-        setShowAddModal(!showAddModal);
-      };
-
-      const handleConfirmDelete = async () => {
-        const response = await api.delete(`atleta/${id}`)
-        if(response){
-            localStorage.clear()
-            setUser(null);
-            navigate('/login');
-        }
-      };
-
-    const handleCancelDelete = () => setShowAddModal(false);
-
 
     return (
         <>
@@ -75,7 +57,7 @@ export const Painel1 = () => {
             </a>
             <ul className="mt-4">
                 <li className="mb-1 group active">
-                    <a href="#" onClick={() => navigate("")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md ">
+                    <a href="#" onClick={() => navigate("")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
                         <BiHomeAlt2 className="mr-3 text-lg" />
                         <span className="text-sm font-semibold">Painel Admin</span>
                     </a>
@@ -84,12 +66,6 @@ export const Painel1 = () => {
                     <a href="#" onClick={() => navigate("mudarSenha")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
                         <BiLock className="mr-3 text-lg" />
                         <span className="text-sm font-semibold">Senha</span>
-                    </a>
-                </li>
-                <li className="mb-1 group">
-                    <a href="#" onClick={() => handleAddModal()} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
-                        <BiLock className="mr-3 text-lg" />
-                        <span className="text-sm font-semibold">Deletar Conta</span>
                     </a>
                 </li>
             </ul>
@@ -212,13 +188,6 @@ export const Painel1 = () => {
                 <Outlet />
             </div>
         </main>
-
-        {showAddModal && (
-            <DeletarAtleta 
-                handleConfirmDelete={handleConfirmDelete}
-                handleCancelDelete={handleCancelDelete}
-            />
-        )}
 
         </>
     );

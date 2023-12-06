@@ -6,10 +6,9 @@ import { api } from "../../services/api";
 import { AuthContext } from "../../Context/Auth";
 import { toast, ToastContainer } from 'react-toastify';
 import { Outlet, useNavigate} from "react-router-dom";
-import { DeletarContaNutricionista } from "../nutricionista/DeletarContaNutricionista";
 
 export const Painel3 = () => {
-    const { signOut, setUser } = useContext(AuthContext)
+    const { signOut } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -19,8 +18,6 @@ export const Painel3 = () => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isDropdownOpenPerf, setIsDropdownOpenPerf] = useState(false);
-
-    const [showAddModal, setShowAddModal] = useState(false);
 
     const toggleDropdown = async () => {
         if(!isDropdownOpen){
@@ -70,21 +67,6 @@ export const Painel3 = () => {
             personal();
     }, [])
 
-    const handleAddModal = async () => {
-        setShowAddModal(!showAddModal);
-      };
-
-      const handleConfirmDelete = async () => {
-        const response = await api.delete(`personalTrainer/${id}`)
-        if(response){
-            localStorage.clear()
-            setUser(null);
-            navigate('/login');
-        }
-      };
-
-    const handleCancelDelete = () => setShowAddModal(false);
-
     return (
         <>
         <ToastContainer position="top-center"/>
@@ -96,7 +78,7 @@ export const Painel3 = () => {
             </a>
             <ul className="mt-4">
                 <li className="mb-1 group active">
-                    <a href="#" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
+                    <a href="#" onClick={() => navigate("")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
                         <BiHomeAlt2 className="mr-3 text-lg" />
                         <span className="text-sm font-semibold">Painel Admin</span>
                     </a>
@@ -105,12 +87,6 @@ export const Painel3 = () => {
                     <a href="#" onClick={() => navigate("mudarSenha")}  className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
                         <BiLock className="mr-3 text-lg" />
                         <span className="text-sm font-semibold">Senha</span>
-                    </a>
-                </li>
-                <li className="mb-1 group">
-                    <a href="#" onClick={() => handleAddModal()}   className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
-                        <BiLock className="mr-3 text-lg" />
-                        <span className="text-sm font-semibold">Deletar Conta</span>
                     </a>
                 </li>
             </ul>
@@ -123,7 +99,7 @@ export const Painel3 = () => {
                 </button>
                 <ul className="flex items-center ml-4">
                     <li className="mr-2">
-                        <a href="#" className="text-white hover:text-gray-200 font-medium">Painel</a>
+                        <button href="#" className="text-white hover:text-gray-200 font-medium" onClick={() => navigate(`/personalTrainer/${localStorage.getItem("@Auth:user_id")}`)}>Painel</button>
                     </li>
                     <li className="text-white mr-2 font-medium">/</li>
                     <li className="text-gray-300 mr-2 font-medium">Análise</li>
@@ -215,13 +191,6 @@ export const Painel3 = () => {
                 <Outlet />
             </div>
         </main>
-
-        {showAddModal && (
-            <DeletarContaNutricionista 
-                handleCancelDelete={handleCancelDelete}
-                handleConfirmDelete={handleConfirmDelete}
-            />
-        )}
 
         </>
     );

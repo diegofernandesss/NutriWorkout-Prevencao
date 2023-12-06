@@ -20,7 +20,6 @@ export * from './nutricionista/Painel2';
 export * from './nutricionista/MudarSenhaNutricionista';
 export * from './personal/Painel3';
 export * from './nutricionista/Home'
-export * from './nutricionista/secoesCardapio/Cardapio'
-export * from './nutricionista/secoesInfoNutricionais/ExibirInformacao'
+export * from './nutricionista/secoes/Cardapio'
 
 export * from  './principal/LandingPage';

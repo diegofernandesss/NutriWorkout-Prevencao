@@ -5,12 +5,17 @@ import { api } from '../../services/api'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { academiaData } from '../../assets'
-
+import { useNavigate, useLocation } from "react-router-dom";
 export const useCadastro = () => {
   const { image, alt } = academiaData;
-
+  
   const notifyError = (error) => toast.error(error.response.data.descricao);
   const notifySuccess = () => toast.success("Cadastrado com Sucesso");
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const { idPlano } = location.state
 
   const validationSchema = yup.object({
     nome: yup
@@ -69,15 +74,33 @@ export const useCadastro = () => {
       cpf: values.cpf,
       senha: values.senha
     };
+    
 
-    try {
-      await api.post(`atletas`, information);
-      notifySuccess()
+    await api.post(`atletas`, information)
+    .then((resp) => {
+      return api.post(`login`, {email: information.email, senha: information.senha})
+    })
+    .then((resp) => {
+      localStorage.setItem("@Auth:token", resp.data.token);
+      localStorage.setItem("@Auth:user_id", resp.data.user_id);
+      localStorage.setItem("@Auth:tipo", resp.data.tipo);
+      
+      navigate("/cadastroCartao", {state: { idPlano }})
       resetForm()
-      console.log(information)
-    } catch (error) {
-      notifyError(error);
-    }
+    })
+    .catch((err) => console.log(err))
+    
+    // try {
+    //   const response = await api.post(`atletas`, information);
+    //   console.log(response);
+    //   localStorage.setItem("@Auth:token", response.data.token);
+    //   localStorage.setItem("@Auth:user_id", response.data.user_id);
+    //   localStorage.setItem("@Auth:tipo", response.data.tipo);
+    //   notifySuccess()
+    //   resetForm()
+    // } catch (error) {
+    //   notifyError(error);
+    // }
   };
   
   const formik = useFormik({
@@ -94,5 +117,5 @@ export const useCadastro = () => {
   });
 
   return {formik, formatCpf, image, alt}
-  
+
 }

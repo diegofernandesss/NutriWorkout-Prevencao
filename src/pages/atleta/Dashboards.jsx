@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 
 export const Dashboards = () => {
     const notifyError = (error) => toast.error(error.response.data.descricao);
     const notifySuccess = (response) => toast.success(response.data.descricao);
-
-     const [cardapio, setCardapio] = useState([]);
-
-    useEffect(() => {
-      api.get('/atleta/cardapio')
-        .then(response => {
-          setCardapio(response.data);
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, []);
 
     const solicitarPersonal = async () => {
         try {
@@ -54,8 +40,6 @@ export const Dashboards = () => {
             notifyError(error)
         }
     }
-
-   
     
     return (
         <>
