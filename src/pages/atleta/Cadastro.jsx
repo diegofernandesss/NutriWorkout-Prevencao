@@ -2,11 +2,10 @@ import { ToastContainer } from 'react-toastify';
 import CustomInput from '../../components/CustomInput'; 
 import { useCadastro } from '../../hooks/atleta/useCadastro';
 import { Layout } from '../Layout'
-import { useNavigate } from "react-router-dom";
 
 export const Cadastro = () => {
   const {formik, formatCpf, image, alt} = useCadastro()
-  const navigate = useNavigate();
+
 
   return (
     <>

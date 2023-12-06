@@ -1,6 +1,14 @@
 import { AiOutlineCheck } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export const PaymentSession = () => {  
+
+    const navigate = useNavigate();
+
+    const handleClickSubscription = (idPlano) => {
+        navigate("/atleta/cadastro", {state: { idPlano }});
+        window.scrollTo(0, 0);
+    }
     return (
         <>
         <section className="mt-24" id='planos'>
@@ -49,9 +57,10 @@ export const PaymentSession = () => {
                         <span className="ml-3">Plano de cardio (se necessário)</span>
                     </li>
                 </ul>
-                <a href="#" className="mt-8 block bg-violet-50 px-6 py-4 text-violet-700 hover:bg-violet-100 text-sm font-semibold leading-4 text-center shadow-md rounded-lg">
+                <button  className="flex items-center justify-center w-full mt-8  bg-violet-50 px-6 py-4 text-violet-700 hover:bg-violet-100 text-sm font-semibold leading-4 text-center shadow-md rounded-lg" onClick={() => handleClickSubscription(1)}>Assine Agora</button>
+                {/* <a href="#" className="mt-8 block bg-violet-50 px-6 py-4 text-violet-700 hover:bg-violet-100 text-sm font-semibold leading-4 text-center shadow-md rounded-lg">
                     Assine Agora
-                </a>
+                </a> */}
             </div>
 
             <div className=" relative rounded-md border border-slate-200 bg-white p-8 shadow-lg">
@@ -88,9 +97,10 @@ export const PaymentSession = () => {
                         <span className="ml-3">Acompanhamento do progresso em relação à composição corporal e condicionamento físico</span>
                     </li>
                 </ul>
-                <a href="#" className="mt-8 block bg-violet-500 px-6 py-4 text-white hover:bg-violet-600 text-sm font-semibold leading-4 text-center shadow-md rounded-lg">
+                <button  className="flex items-center justify-center w-full mt-8 bg-violet-500 px-6 py-4 text-white hover:bg-violet-600 text-sm font-semibold leading-4 text-center shadow-md rounded-lg" onClick={() => handleClickSubscription(2)}>Assine Agora</button>
+                {/* <a href="#" className="mt-8 block bg-violet-500 px-6 py-4 text-white hover:bg-violet-600 text-sm font-semibold leading-4 text-center shadow-md rounded-lg">
                     Assine Agora
-                </a>
+                </a> */}
             </div>
 
             <div className=" relative rounded-md border border-slate-200 bg-white p-8 shadow-lg">
@@ -130,9 +140,7 @@ export const PaymentSession = () => {
 
                 {/** Call to action */}
 
-                <a href="#" className="mt-8 block bg-violet-50 px-6 py-4 text-violet-700 hover:bg-violet-100 text-sm font-semibold leading-4 text-center shadow-md rounded-lg">
-                    Assine Agora
-                </a>
+                <button  className="flex items-center justify-center w-full mt-8  bg-violet-50 px-6 py-4 text-violet-700 hover:bg-violet-100 text-sm font-semibold leading-4 text-center shadow-md rounded-lg" onClick={() => handleClickSubscription(3)}>Assine Agora</button>
                 
             </div>
 
