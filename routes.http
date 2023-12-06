@@ -1,0 +1,7 @@
+@base-URL=http://localhost:5000
+
+###
+
+# @name get-list-user
+
+GET {{base-URL}}/nutricionista/notificacoes
