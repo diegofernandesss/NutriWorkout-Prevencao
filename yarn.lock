@@ -2240,7 +2240,11 @@ prelude-ls@^1.2.1:
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
+<<<<<<< Updated upstream
 "prop-types@15.x.x - 16.x.x", prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+=======
+"prop-types@15.x.x - 16.x.x", prop-types@^15.6.2, prop-types@^15.8.1:
+>>>>>>> Stashed changes
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -2284,6 +2288,7 @@ react-anchor-link-smooth-scroll@^1.0.12:
   resolved "https://registry.npmjs.org/react-anchor-link-smooth-scroll/-/react-anchor-link-smooth-scroll-1.0.12.tgz"
   integrity sha512-aaY+9X0yh8YnC0jBfoTKpsiCLdO/Y6pCltww+VB+NnTBPDOvnIdnp1AlazajsDitc1j+cVSQ+yNtaVeTIMQbxw==
 
+<<<<<<< Updated upstream
 react-credit-cards@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-credit-cards/-/react-credit-cards-0.8.3.tgz#608a8ee8bf3a88857fc83023ffba1ad536ba8c7e"
@@ -2291,6 +2296,8 @@ react-credit-cards@^0.8.3:
   dependencies:
     payment "^2.3.0"
 
+=======
+>>>>>>> Stashed changes
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
