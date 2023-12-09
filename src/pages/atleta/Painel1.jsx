@@ -1,5 +1,7 @@
 
 import { BiHomeAlt2, BiLock, BiMenu, BiBell, BiSolidArrowToRight } from "react-icons/bi";
+import { LiaDumbbellSolid } from "react-icons/lia";
+
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
@@ -63,6 +65,12 @@ export const Painel1 = () => {
                     </a>
                 </li>
                 <li className="mb-1 group">
+                    <a href="#" onClick={() => navigate("atleta/tabelaTreino")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
+                        <LiaDumbbellSolid className="mr-3 text-lg" />
+                        <span className="text-sm font-semibold">Tabela de treino</span>
+                    </a>
+                </li>
+                <li className="mb-1 group">
                     <a href="#" onClick={() => navigate("mudarSenha")} className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white">
                         <BiLock className="mr-3 text-lg" />
                         <span className="text-sm font-semibold">Senha</span>
@@ -80,7 +88,7 @@ export const Painel1 = () => {
                 </button>
                 <ul className="flex items-center ml-4">
                     <li className="mr-2">
-                        <a href="#" className="text-white hover:text-gray-200 font-medium">Painel</a>
+                        <button href="#" className="text-white hover:text-gray-200 font-medium" onClick={() => navigate(`/atleta/${localStorage.getItem("@Auth:user_id")}`)}>Painel</button>
                     </li>
                     <li className="text-white mr-2 font-medium">/</li>
                     <li className="text-gray-300 mr-2 font-medium">Análise</li>
