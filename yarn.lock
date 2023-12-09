@@ -907,6 +907,11 @@ custom-event-polyfill@^1.0.7:
   resolved "https://registry.npmjs.org/custom-event-polyfill/-/custom-event-polyfill-1.0.7.tgz"
   integrity sha512-TDDkd5DkaZxZFM8p+1I3yAlvM3rSr1wbrOliG4yJiwinMZN8z/iGL7BTlDkrJcYTmgUSb4ywVCc3ZaUtOtC76w==
 
+dayjs@^1.11.10:
+  version "1.11.10"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
+  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
+
 debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
@@ -1361,7 +1366,7 @@ fraction.js@^4.2.0:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.6.tgz"
   integrity sha512-n2aZ9tNfYDwaHhvFTkhFErqOMIb8uyzSQ+vGJBjZyanAKZVbGUQ1sngfk9FdkBw7G26O7AgNjLcecLffD1c7eg==
 
-framer-motion@^10.16.12, framer-motion@^10.16.2:
+framer-motion@^10.16.2:
   version "10.16.12"
   resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-10.16.12.tgz"
   integrity sha512-w7Yzx0OzQ5Uh6uNkxaX+4TuAPuOKz3haSbjmHpdrqDpGuCJCpq6YP9Dy7JJWdZ6mJjndrg3Ao3vUwDajKNikCA==

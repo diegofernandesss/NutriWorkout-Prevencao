@@ -8,7 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { Outlet, useNavigate} from "react-router-dom";
 
 export const Painel2 = () => {
-    const { signOut } = useContext(AuthContext)
+    const { signOut, setUSer } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -66,6 +66,7 @@ export const Painel2 = () => {
             }
             nutricionistaRequest();
     }, [])
+    
 
     return (
         <>
@@ -88,6 +89,7 @@ export const Painel2 = () => {
                         <span className="text-sm font-semibold">Senha</span>
                     </a>
                 </li>
+                
             </ul>
         </div>
         {/* start: Main */}
