@@ -4,7 +4,8 @@ import { PrivateRoute } from "./privateRoutes";
 import { CreditCardForm } from "../pages/checkout/CreditCardForm";
 import { CheckoutAssinatura } from "../pages/checkout/CheckoutAssinatura";
 import { HomePersonal } from "../pages/personal/HomePersonal";
-import { TabelaTreino } from "../pages/personal/secoes/tabelaTreino";
+import { TabelaTreino } from "../pages/personal/secoes/TabelaTreino";
+import { TabelaTreinoAtleta } from "../pages/atleta/TabelaTreinoAtleta";
 
 export default function MainRouters() {
     return (
@@ -26,6 +27,7 @@ export default function MainRouters() {
         <Route path="/atleta/:id" element={<PrivateRoute panelType="1" />} >
           <Route index element={<Dashboards />} />
           <Route path="" element={<Dashboards />} />
+          <Route path="atleta/tabelaTreino" element={<TabelaTreinoAtleta />} />
           <Route path="mudarSenha" element={<MudarSenhaAtleta />} />
         </Route>
 
